@@ -1,8 +1,3 @@
-//+------------------------------------------------------------------+
-//|                                                      ProjectName |
-//|                                      Copyright 2020, CompanyName |
-//|                                       http://www.companyname.net |
-//+------------------------------------------------------------------+
 #property  copyright "Sergey_s_altaya"
 #property link      "https://www.mql5.com"
 #property version   "1.00"
