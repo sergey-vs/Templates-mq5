@@ -25,5 +25,18 @@ static input color InpPanelTxtColor = clrWhiteSmoke;      // text color  (цве
 //+------------------------------------------------------------------+
 class CGraphicalPanel : public CAppDialog
 (
+    private:
 
+        // private methods
+        void CreatePanel();
+
+    public:
+
+        void CGraphicalPanel ();
+        void ~CGraphicalPanel ();
+        void Oninit ();
+
+        // cahrt event handler
+        void PanelChartEvent (const int id, const long &lparam, const double &dparam, const string &sparam) 
+ 
 );
