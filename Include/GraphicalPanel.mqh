@@ -61,12 +61,20 @@ bool CGraphicalPanel:: CreatePanel(void){
     this.Create(NULL,"Time Range EA",0,0,0,InpPanelWidth,InpPanelHeight);
 
     // run panel
-    if(!Run())
+    if(!Run()){Print("Failed to run panel"); return false;}
+
+    // refresh chart
+    ChartRedraw();
 
     return true;
 
 }
 
+void CGraphicalPanel::PanelChartEvent(const int id, const long &lparam, const double &dparam, const string &sparam){
 
-14.15
+    // call chart event method of base class
+    ChartEvent(id,lparam,dparam,sparam);
+
+}
+
 

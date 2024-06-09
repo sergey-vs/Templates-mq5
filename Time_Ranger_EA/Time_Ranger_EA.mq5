@@ -7,6 +7,7 @@
 //+------------------------------------------------------------------+
 
 #include <Trade\Trade.mqh>
+#include <GraphicalPanel.mqh>
 
 //+------------------------Inputs------------------------------------+
 //| Inputs                                                           |
@@ -56,6 +57,7 @@ struct RANGE_STRUCT
   RANGE_STRUCT range;
   MqlTick prevTick, lastTick;
   CTrade trade;
+  CGraphicalPanel panel;
 
 
 //+------------------------Expert initialization function------------+
@@ -82,6 +84,9 @@ int OnInit()
   // draw objects
   DrawObjects();
 
+  // create panel
+  panel.Oninit();
+
    return(INIT_SUCCEEDED);
   }
   
@@ -91,14 +96,18 @@ int OnInit()
 
 void OnDeinit(const int reason)
   {
-    //delete objects
+    // delete objects
     ObjectsDeleteAll(NULL, "range");
+
+    // destroy panel
+    panel.Destroy(reason);
     
   }
   
 //+------------------------Expert tick function----------------------+
 //| Expert tick function                                             |
 //+------------------------------------------------------------------+
+
 void OnTick()
   {
    // Get current tick
@@ -147,6 +156,15 @@ void OnTick()
    CheckBreakouts();
 
   }
+
+//+------------------------Chart event handler-----------------------+
+//| Chart event handler                                              |
+//+------------------------------------------------------------------+ 
+void OnChartEvent(const int id, const long &lparam, const double &dparam, const string &sparam){
+
+  panel.PanelChartEvent(id,lparam,dparam,sparam);
+
+}
 
 // chekk user inputs
 bool CheckInputs()
@@ -205,7 +223,8 @@ bool CheckInputs()
         return false;
       } 
 
-   return true;   
+   return true;  
+
 }
 
 //calculate a new range
@@ -301,6 +320,7 @@ int CountOpenPositions()
   }
 
   return counter;
+
 }
 
 // Check for breakouts
@@ -395,6 +415,7 @@ bool ClosePositions()
   }
   
   return true;
+
 }
 
 // draw chart objects
