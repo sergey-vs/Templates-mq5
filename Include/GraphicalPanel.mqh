@@ -28,15 +28,45 @@ class CGraphicalPanel : public CAppDialog
     private:
 
         // private methods
-        void CreatePanel();
+        bool CreatePanel();
 
     public:
 
         void CGraphicalPanel ();
         void ~CGraphicalPanel ();
-        void Oninit ();
+        bool Oninit ();
 
         // cahrt event handler
-        void PanelChartEvent (const int id, const long &lparam, const double &dparam, const string &sparam) 
- 
+        void PanelChartEvent (const int id, const long &lparam, const double &dparam, const string &sparam);
 );
+
+// constructor
+void CGraphicalPanel::CGraphicalPanel(void){}
+
+// deconstructor
+void CGraphicalPanel::~CGraphicalPanel(void){}
+
+bool CGraphicalPanel::Oninit(void){
+
+    // create panel
+    if(!this.CreatePanel()){return false;}
+
+    return true;
+
+}
+
+bool CGraphicalPanel:: CreatePanel(void){
+
+    // create dialog panel
+    this.Create(NULL,"Time Range EA",0,0,0,InpPanelWidth,InpPanelHeight);
+
+    // run panel
+    if(!Run())
+
+    return true;
+
+}
+
+
+14.15
+
